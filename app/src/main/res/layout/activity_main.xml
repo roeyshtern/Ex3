@@ -57,6 +57,7 @@
             android:layout_gravity="center_horizontal">
 
             <Button
+                android:enabled="false"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:text="@string/plus"
@@ -65,6 +66,7 @@
                 android:onClick="calc" />
 
             <Button
+                android:enabled="false"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:text="@string/minus"
@@ -75,6 +77,7 @@
                 android:onClick="calc" />
 
             <Button
+                android:enabled="false"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:text="@string/multiple"
@@ -84,6 +87,7 @@
                 android:onClick="calc"/>
 
             <Button
+                android:enabled="false"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:text="@string/divid"
@@ -144,7 +148,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/equals"
                 android:textSize="30sp"
-                android:id="@+id/equalsButton" />
+                android:id="@+id/equalsButton"
+                android:enabled="false"/>
 
             <TextView
                 android:layout_width="165dp"
@@ -154,7 +159,7 @@
                 android:gravity="center"
                 android:background="@drawable/border"
                 android:layout_marginLeft="45dp"
-
+                android:freezesText="true"
                 android:id="@+id/resultText" />
         </LinearLayout>
 
