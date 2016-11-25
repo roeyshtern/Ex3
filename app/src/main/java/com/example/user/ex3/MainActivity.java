@@ -15,9 +15,11 @@ public class MainActivity extends AppCompatActivity implements TextWatcher{
 
     int op1 = 0;
     int op2 = 0;
-    Button plusBt,minusBt,multipleBt,dividBt,equalsBt;
+    Button plusBt,minusBt,multipleBt,dividBt,equalsBt,clearBt,answerBt;
     EditText etOperand1,etOperand2;
     TextView resultText;
+    int calc = 0;
+    int result = 0;
     final String RESULT = "result";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +31,25 @@ public class MainActivity extends AppCompatActivity implements TextWatcher{
         multipleBt = (Button)findViewById(R.id.multipleButton);
         dividBt = (Button)findViewById(R.id.dividButton);
         equalsBt = (Button)findViewById(R.id.equalsButton);
+        answerBt = (Button)findViewById(R.id.answerButton);
 
         etOperand1 = (EditText)findViewById(R.id.etOperand1);
         etOperand2 = (EditText)findViewById(R.id.etOperand2);
 
+        clearBt = (Button)findViewById(R.id.clearButton);
+
+        clearBt.setOnClickListener(new myListener());
         etOperand1.addTextChangedListener(this);
         etOperand2.addTextChangedListener(this);
         resultText = (TextView)findViewById(R.id.resultText);
+
+        answerBt.setOnClickListener(new View.OnClickListener() {
+            String result;
+            @Override
+            public void onClick(View v) {
+                etOperand1.setText(resultText.getText().toString());
+            }
+        });
 
     }
     /*
@@ -57,7 +71,6 @@ public class MainActivity extends AppCompatActivity implements TextWatcher{
     */
     public void calc(View view){
 
-
         String strop1 = "";
         String strOp2 = "";
 
@@ -72,30 +85,43 @@ public class MainActivity extends AppCompatActivity implements TextWatcher{
             this.op1 = Integer.valueOf(strop1);
             this.op2 = Integer.valueOf(strOp2);
 
-            switch(view.getId())
-            {
+            switch(view.getId()) {
                 case R.id.plusButton:
-                    this.op1 = op1+op2;
-                    resultText.setText(Integer.toString(op1));
+                    this.result = op1 + op2;
+                    this.calc = 1;
                     break;
 
                 case R.id.minusButton:
-                    op1 = op1-op2;
-                    resultText.setText(Integer.toString(op1));
+                    this.result = op1 - op2;
+                    this.calc = 1;
                     break;
 
                 case R.id.multipleButton:
-                    op1 = op1*op2;
-                    resultText.setText(Integer.toString(op1));
+                    this.result = op1 * op2;
+                    this.calc = 1;
                     break;
 
                 case R.id.dividButton:
-                    op1 = op1/op2;
-                    resultText.setText(Integer.toString(op1));
+                    this.result = op1 / op2;
+                    this.calc = 1;
                     break;
-
-
+                case R.id.equalsButton:
+                    if(resultText.getText().toString().equals(Integer.toString(this.result)))
+                    {
+                        Toast.makeText(this, "You must enter paremter to calc, Try again!",Toast.LENGTH_SHORT).show();
+                    }
+                    if(this.calc!=0)
+                    {
+                        resultText.setText(Integer.toString(this.result));
+                        answerBt.setEnabled(true);
+                    }
+                    else
+                    {
+                        Toast.makeText(this, "You must enter paremter to calc, Try again!",Toast.LENGTH_SHORT).show();
+                    }
+                    break;
             }
+
         }
 
     }
@@ -121,6 +147,16 @@ public class MainActivity extends AppCompatActivity implements TextWatcher{
         multipleBt.setEnabled(newState);
         dividBt.setEnabled(newState);
         equalsBt.setEnabled(newState);
+        clearBt.setEnabled(newState);
     }
-
+    private class myListener implements View.OnClickListener
+    {
+        @Override
+        public void onClick(View v) {
+            etOperand1.setText("");
+            etOperand2.setText("");
+            resultText.setText(R.string.result);
+            answerBt.setEnabled(false);
+        }
+    }
 }

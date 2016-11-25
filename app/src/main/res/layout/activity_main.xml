@@ -144,6 +144,7 @@
             android:layout_marginTop="15dp">
 
             <Button
+                android:onClick="calc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/equals"
@@ -155,14 +156,26 @@
                 android:layout_width="165dp"
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="result"
+                android:text="@string/result"
                 android:gravity="center"
                 android:background="@drawable/border"
                 android:layout_marginLeft="45dp"
                 android:freezesText="true"
                 android:id="@+id/resultText" />
         </LinearLayout>
-
+        <Button
+            android:enabled="false"
+            android:id="@+id/clearButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/clear"
+            android:layout_below="@+id/resultLayout"/>
+        <Button
+            android:enabled="false"
+            android:id="@+id/answerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/answer" />
     </RelativeLayout>
 
 </RelativeLayout>
